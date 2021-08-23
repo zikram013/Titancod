@@ -1,4 +1,10 @@
-import string
+from datetime import timedelta
+import re
+
+# timeformat = [str(timedelta(seconds=0.34))]
+# print(timeformat)
+eliminarNoLetras = lambda str: "".join(re.findall("[\w]", str))
+
 
 casosDePrueba = int(input())
 listaEntradas = list()
@@ -7,18 +13,27 @@ alfalist = list(alfa)
 pos = 0
 listaSinVacios = list()
 for i in range(casosDePrueba):
-    xmin = float(input())
-    xmax = float(input())
+    xmin = input()
+
+    xmax = input()
+
     text = input()
-    listaEntradas.append((xmin, xmax, text.lower()))
+    xmax2 = [str(timedelta(seconds=float(xmax)))]
+    xmin2 = [str(timedelta(seconds=float(xmin)))]
+    listaEntradas.append((xmin2, xmax2, text.lower()))
 
 for i in range(len(listaEntradas)):
-    print(listaEntradas[i][2])
+
     valor = listaEntradas[i][2]
     if valor != '""' or listaEntradas[i][2] != '""':
         listaSinVacios.append(listaEntradas[i])
 
-print(listaSinVacios)
+for i in listaSinVacios:
+    print(str(i[0]))
+    print(str(i[1]))
+    print(str(eliminarNoLetras(i[2])))
+
+
 
 """
 8
