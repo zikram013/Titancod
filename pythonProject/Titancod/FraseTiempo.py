@@ -1,9 +1,13 @@
-  
-from datetime import timedelta
+
+from functools import reduce
+import re
 
 
-# timeformat = [str(timedelta(seconds=0.34))]
-# print(timeformat)
+def secondsToStr(t):
+    return "%02d:%02d:%02d.%02d" % \
+        reduce(lambda ll,b : divmod(ll[0],b) + ll[1:],
+            [(round(t*1000),),1000,60,60])
+
 eliminarNoLetras = lambda str: "".join(re.findall("[\w]", str))
 
 
@@ -13,15 +17,16 @@ alfa = "abcdefghijklmnopqrstuvwxyz"
 alfalist = list(alfa)
 pos = 0
 listaSinVacios = list()
+
 for i in range(casosDePrueba):
-    xmin = input()
-
-    xmax = input()
-
+    xmin = float(input())
+    xmax = float(input())
     text = input()
-    xmax2 = str(timedelta(seconds=float(xmax)))
-    xmin2 = str(timedelta(seconds=float(xmin)))
+    xmax2 = secondsToStr(xmax)[:-1]
+    xmin2 = secondsToStr(xmin)[:-1]
     listaEntradas.append((xmin2, xmax2, text))
+
+
 
 for i in range(len(listaEntradas)):
 
@@ -36,9 +41,10 @@ prueba=(listaSinVacios[1][2])
 new_string=prueba.replace('"','')
 
 
+
 for i in listaSinVacios:
-    print('0'+str(i[0])[:-4])
-    print('0'+str(i[1])[:-4])
+    print((i[0]))
+    print((i[1]))
     og=str(i[2])
     og2=og.replace('"','')
     aux=str(eliminarNoLetras(og2))
