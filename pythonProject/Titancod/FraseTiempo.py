@@ -1,5 +1,6 @@
+  
 from datetime import timedelta
-import re
+
 
 # timeformat = [str(timedelta(seconds=0.34))]
 # print(timeformat)
@@ -18,47 +19,36 @@ for i in range(casosDePrueba):
     xmax = input()
 
     text = input()
-    xmax2 = [str(timedelta(seconds=float(xmax)))]
-    xmin2 = [str(timedelta(seconds=float(xmin)))]
-    listaEntradas.append((xmin2, xmax2, text.lower()))
+    xmax2 = str(timedelta(seconds=float(xmax)))
+    xmin2 = str(timedelta(seconds=float(xmin)))
+    listaEntradas.append((xmin2, xmax2, text))
 
 for i in range(len(listaEntradas)):
 
     valor = listaEntradas[i][2]
     if valor != '""' or listaEntradas[i][2] != '""':
         listaSinVacios.append(listaEntradas[i])
+        
+todo = len(listaSinVacios)-1
+j=0
+
+prueba=(listaSinVacios[1][2])
+new_string=prueba.replace('"','')
+
 
 for i in listaSinVacios:
-    print(str(i[0]))
-    print(str(i[1]))
-    print(str(eliminarNoLetras(i[2])))
-
-
-
-"""
-8
-0
-0.34
-""
-0.34
-1.35
-"TIWULAMPITA."
-1.35
-2.57
-"KUSIKUSIMPITA"
-2.57
-2.97
-""
-2.97
-3.73
-"kuntiri:"
-3.73
-4.26
-"alicia"
-4.26
-4.79
-"ramos"
-4.79
-4.80
-""
-"""
+    print('0'+str(i[0])[:-4])
+    print('0'+str(i[1])[:-4])
+    og=str(i[2])
+    og2=og.replace('"','')
+    aux=str(eliminarNoLetras(og2))
+    
+    if og2==aux:
+    	og3=og2.lower()
+    	print(og3)
+    else:
+    	print(aux)
+    
+    if j!=todo:
+    	print("")
+    	j+=1
