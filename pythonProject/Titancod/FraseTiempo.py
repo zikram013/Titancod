@@ -4,9 +4,7 @@ import re
 
 
 def secondsToStr(t):
-    return "%02d:%02d:%02d.%02d" % \
-        reduce(lambda ll,b : divmod(ll[0],b) + ll[1:],
-            [(round(t*1000),),1000,60,60])
+    return "%02d:%02d:%02d.%02d" % reduce(lambda ll,b : divmod(ll[0],b) + ll[1:],[(round(t*1000),),1000,60,60])
 
 eliminarNoLetras = lambda str: "".join(re.findall("[\w]", str))
 
@@ -49,12 +47,22 @@ for i in listaSinVacios:
     og2=og.replace('"','')
     aux=str(eliminarNoLetras(og2))
     
-    if og2==aux:
-    	og3=og2.lower()
-    	print(og3)
-    else:
-    	print(aux)
+    #print(aux.lower())
     
-    if j!=todo:
-    	print("")
-    	j+=1
+
+    if og2==aux:
+        og3=og2.lower()
+        if j == todo:
+    	    print(og3,end="")
+        elif j<todo:
+    	    print(og3)
+    	    print("")
+    	    j+=1
+    else:
+        if j == todo:
+    	    print(aux,end="")
+        elif j<todo:
+    	    print(aux)
+    	    print("")
+    	    j+=1
+    	
