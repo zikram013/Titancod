@@ -24,7 +24,7 @@ elif len(mesDia) > 4:
     print("NO")
 else:
     if mesDia in cadena:
-        print("SÍ")
+        print("SI")
     else:
         print("NO")
 
