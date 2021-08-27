@@ -1,17 +1,18 @@
-numero = int(input())
+numero=int(input())
 listaNumeros = list()
-for i in range(0, numero):
+for i in range(1, numero+1):
     listaNumeros.append(i)
 
 filtrado = list(filter(lambda x: x % 2 != 0, listaNumeros))
 i = 1
-while i != len(filtrado):
-    n = filtrado[i]
-    print(n)
-    filtrado = list(filter(lambda x: listaNumeros.index(x) % n != 0, filtrado))
-    print(filtrado)
+while  len(filtrado) >i:
+    
+    n=filtrado[i]
+    aux=filtrado[:n-1]
+    aux2=filtrado[n-1:]
+    aux2=list(filter(lambda x:aux2.index(x)%n!=0,aux2))
+    filtrado=aux+aux2
 
     i+=1
 
-print(filtrado)
 print(len(filtrado))
