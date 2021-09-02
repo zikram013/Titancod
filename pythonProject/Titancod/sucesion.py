@@ -2,14 +2,20 @@ def sucesion(numero):
     sucList=list()
     sucList.append(0)
     contador=0
-    while sucList[-1]!=numero:
-        if contador==0:
-            sucList.append(2)
-        else:
-            c=sucList[-1]+pow(3,contador-1)
-            sucList.append(c)
-        contador+=1
-    return sucList[-1]+pow(3,contador-1)
+    act=0
+    if numero==0:
+        return 2
+    else:
+        while act<numero:
+            if contador==0:
+                act=2
+            else:
+                act=act+pow(3,contador-1)
+                
+            contador+=1
+        return act+pow(3,contador-1)
+
+
 
 #listaSucesion(2,3,6,15,42)
 
