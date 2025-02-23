@@ -1,39 +1,43 @@
-def sumas(n, init):
-    numerosSumados = list()
-    mitad = (n // 2) + 1
-    contador = 0
-    for i in range(init, mitad + 1):
-        contador = contador + i
-        if contador <= n:
-            numerosSumados.append(i)
-            return numerosSumados
-        else:
-            numerosSumados = sumas(n, init + 1)
-    return numerosSumados
+import sys
 
 
-casos = int(input())
-listaCasos = list()
-for i in range(casos):
-    c = int(input())
-    listaCasos.append(c)
+def main():
+    # Leer toda la entrada de una sola vez
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    T = int(data[0])
+    index = 1
+    results = []
 
-for c in listaCasos:
-    resultado = sumas(c, 1)
-    if len(resultado) == 1:
-        print(resultado[0])
-    else:
-        resultado = map(str, resultado)
-        nums = " ".join(resultado)
-        print(nums)
+    for _ in range(T):
+        N = int(data[index])
+        index += 1
+        found = False
+
+        # Determinar el máximo valor de L tal que L*(L+1)/2 <= N
+        maxL = 1
+        L = 2
+        while L * (L + 1) // 2 <= N:
+            maxL = L
+            L += 1
+
+        # Buscar la secuencia de mayor longitud (de maxL a 2)
+        for L in range(maxL, 1, -1):
+            numerator = N - (L * (L - 1) // 2)
+            if numerator % L == 0:
+                a = numerator // L
+                if a > 0:
+                    # Se encontró la secuencia: desde a hasta a+L-1
+                    results.append(" ".join(str(a + i) for i in range(L)))
+                    found = True
+                    break
+
+        if not found:
+            results.append("-1")
+
+    sys.stdout.write("\n".join(results))
 
 
-
-
-"""
-4
-5
-8
-23
-90
-"""
+if __name__ == '__main__':
+    main()

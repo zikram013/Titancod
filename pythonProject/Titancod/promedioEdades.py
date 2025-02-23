@@ -1,32 +1,22 @@
-#import numpy
+def calcular_promedio(cadena):
+    edades = []
+    i = 0
+    while i < len(cadena):
+        # Si encontramos el patrón "10"
+        if cadena[i] == '1' and i + 1 < len(cadena) and cadena[i+1] == '0':
+            edades.append(10)
+            i += 2
+        else:
+            edades.append(int(cadena[i]))
+            i += 1
+    return sum(edades) / len(edades)
 
-def lecturaDeCasos(cad,lon):
-    total=0.0
-    for i in cad:
-        if int(i)!= 0:
-            total=total+float(i)
-        elif int(i)==0:
-            total=total+9.0
-            lon=lon-1
-    
-    resto=total%lon
-    if resto==0:
-        total=total//lon
-        total=round(total)
+t = int(input())
+for _ in range(t):
+    cadena = input().strip()
+    promedio = calcular_promedio(cadena)
+    # Si el promedio es entero, se imprime sin decimales; de lo contrario, se redondea a 5 decimales.
+    if promedio.is_integer():
+        print(int(promedio))
     else:
-        total=total/lon
-        total=round(total,5)
-        
-    return total
-    
-
-casos=int(input())
-listaCasos=list()
-for i in range(casos):
-    cadena=input()
-    listaCasos.append(cadena)
-
-for i in listaCasos:
-    lon=len(i)
-    resultado=lecturaDeCasos(i,lon)
-    print(resultado)
+        print(round(promedio, 5))
