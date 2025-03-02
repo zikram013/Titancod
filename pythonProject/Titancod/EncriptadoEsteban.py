@@ -1,55 +1,41 @@
-"""
-vocales -> espacios vacios
-se guarda la vocal en orden y luego susituye en el mismo orden
-se elimina la vocal
-se termina la oracion y pone punto
-si quedan vocales se ponen los ascii de esas vocales separados por un espacion cada uno
-si en la lista hay menos vocales que espacios, se agrega un _
-si la oracion inicia con vocal, se pone un _
-"""
-
-casos = 100
-
 def encriptado(oracion):
-    vocales = ['a', 'e', 'i', 'o', 'u']
+    vocales = "aeiouAEIOU"
     listaVocales = []
+    listaOracionV2 = []
     iteracion = 0
-    listaOracion = list(oracion)
-    listaOracionV2 =[]
-    for letra in listaOracion:
-        if iteracion == 0 and vocales.__contains__(letra.lower()):
+    
+    for letra in oracion:
+        if iteracion == 0 and letra in vocales:
             listaVocales.append(letra)
             listaOracionV2.append("_")
-            iteracion = iteracion + 1
-        elif iteracion == len(listaOracion)-1:
-            listaOracionV2.append(".")
-        else:
-            if letra == " ":
-                if(len(listaVocales)==0):
-                    listaVocales.append("_")
-                else:
-                    "listaOracionV2[iteracion] = listaVocales.pop(0)"
-                    listaOracionV2.append(listaVocales.pop(0))
-            elif letra in vocales:
-                listaOracionV2.append(" ")
-                listaVocales.append(letra)
-            else:
-                listaOracionV2.append(letra)
-
-    if len(listaVocales)>0:
-        for letra in listaVocales:
-            listaOracionV2.append(str(int.from_bytes(letra.encode(),byteorder='big')))
+        elif letra in vocales:
             listaOracionV2.append(" ")
+            listaVocales.append(letra)
+        elif letra == " ":
+            if listaVocales:
+                listaOracionV2.append(listaVocales.pop(0))
+            else:
+                listaOracionV2.append("_")
+        else:
+            listaOracionV2.append(letra)
+        iteracion += 1
+    
+    listaOracionV2.append(".")
+    
+    if listaVocales:
+        listaOracionV2.append(" ")
+        listaOracionV2.append(" ".join(str(ord(v)) for v in listaVocales))
+    
+    return "".join(listaOracionV2)
 
-    cadena = "".join(listaOracionV2)
+def main():
+    casos = 100
+    for _ in range(casos):
+        oracion = input().strip()
+        if oracion:
+            print(encriptado(oracion))
+        else:
+            break
 
-    return cadena
-
-
-for i in range(casos):
-    oracion = input().strip()
-    if not oracion:
-        break
-    else:
-        encrypt = encriptado(oracion)
-        print(encrypt)
+if __name__ == "__main__":
+    main()
