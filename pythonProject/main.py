@@ -4,3 +4,5 @@ if (x*x+y*y)<=100:
     print(1)
 else:
     print(0)
+
+X=1
